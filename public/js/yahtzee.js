@@ -28,25 +28,33 @@ window.Yahtzee.Views.Menu = function() {
 window.Yahtzee.Models.Die = function() {
   this.roll = function() {
     var num = Math.floor(Math.random() * 6) + 1
-    var source = 'die';
+    var source = '/img/die';
     source = source + '-' + num + '.png'
-    var $img = $('<img>').attr('src', source);
+    var $img = $('<img>').attr({
+      src: source,
+      height: 60,
+      width: 60
+    });
     return $img;
   }
 
-  debugger;
-
+  $('#container').append(this.roll());
 }
 
+window.Yahtzee.Models.Dice = function(num_dice) {
+  this.dice = [];
+  this.createDice = function() {
+    for (var i = 0; i < num_dice; i++) {
+      this.dice.push(new window.Yahtzee.Models.Dice())
+    }
+  }
 
-
-
-
-
-
-
+  this.createDice();
+}
 
 $(function() {
   var menu = new window.Yahtzee.Views.Menu();
   var die = new window.Yahtzee.Models.Die();
+  var dice = new window.Yahtzee.Models.Dice();
+  debugger;
 });
